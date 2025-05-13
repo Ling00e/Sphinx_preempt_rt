@@ -50,11 +50,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Sommaire:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Sommaire</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#dependances">Dépendances:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#instruction">Instruction:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dependances">Dépendances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instructions">Instructions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verification">Vérification</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="debogage.html">Débogage</a></li>
@@ -88,21 +89,95 @@
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Lien vers cette rubrique"></a></h1>
 <section id="dependances">
-<h2>Dépendances:<a class="headerlink" href="#dependances" title="Lien vers cette rubrique"></a></h2>
+<h2>Dépendances<a class="headerlink" href="#dependances" title="Lien vers cette rubrique"></a></h2>
 <dl>
-<dt>Mettre à jour le système:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
-<span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>upgrade
+<dt>Mettre à jour le système:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+<span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
 </pre></div>
 </div>
 </dd>
-<dt>Installer les outils:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>bc<span class="w"> </span>bison<span class="w"> </span>build-essential<span class="w"> </span>flex<span class="w"> </span>gcc<span class="w"> </span>libelf-dev<span class="w"> </span>libncurses-dev<span class="w"> </span>libssl-dev<span class="w"> </span>make
+<dt>Installer les outils:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>bc<span class="w"> </span>bison<span class="w"> </span>build-essential<span class="w"> </span>flex<span class="w"> </span>gcc<span class="w"> </span>libelf-dev<span class="w"> </span>libncurses-dev<span class="w"> </span>libssl-dev<span class="w"> </span>make
 </pre></div>
 </div>
 </dd>
 </dl>
 </section>
-<section id="instruction">
-<h2>Instruction:<a class="headerlink" href="#instruction" title="Lien vers cette rubrique"></a></h2>
+<section id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Lien vers cette rubrique"></a></h2>
+<dl>
+<dt>Création d’un répertoire de travail:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>mkdir<span class="w"> </span>~/kernel
+<span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>~/kernel
+</pre></div>
+</div>
+</dd>
+<dt>Vérification de la version du noyau Linux install sur son Ubuntu 22.04:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uname<span class="w"> </span>-a
+</pre></div>
+</div>
+</dd>
+<dt>Récupérer les fichiers sources du noyau et le fichier patch real-time correspondant à sa version du noyau Linux:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>wget<span class="w"> </span>https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.15.96.tar.gz
+<span class="gp">$ </span>wget<span class="w"> </span>https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.15/patch-5.15.96-rt61.patch.xz
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vous pouvez récupérer d’autres versions plus spécifiques du noyau sur le site officiel <a class="reference external" href="https://www.kernel.org/">kernel.org</a></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Si vous ne trouvez pas le fichier patch correspondant, il faudra consulter les anciennes versions dans le répertoire <strong>older/</strong> sur le site officiel:
+<a class="reference external" href="https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.15/older/">https://mirrors.edge.kernel.org/pub/linux/kernel/projects/rt/5.15/older/</a></p>
+</div>
+<dl>
+<dt>Décompresser les fichiers sources:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tar<span class="w"> </span>-xzf<span class="w"> </span>linux-5.15.96.tar.gz
+<span class="gp">$ </span>xz<span class="w"> </span>-d<span class="w"> </span>patch-5.15.96-rt61.patch.xz
+</pre></div>
+</div>
+</dd>
+<dt>Appliquer le patch:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>linux-5.15.96
+<span class="gp">$ </span>patch<span class="w"> </span>-p1<span class="w"> </span>&lt;<span class="w"> </span>../patch-5.15.96-rt61.patch
+</pre></div>
+</div>
+</dd>
+<dt>Configurer les options de compilation du noyau:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cp<span class="w"> </span>/boot/config-5.15.0-43-generic<span class="w"> </span>.config
+<span class="gp">$ </span>make<span class="w"> </span>menuconfig
+</pre></div>
+</div>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Pour la suite des instructions, si vous rencontrez des erreurs de compilation ou d’installation, il faudra consulter la section <a class="reference internal" href="debogage.html#debogage"><span class="std std-ref">Débogage</span></a>.</p>
+</div>
+<dl>
+<dt>Compiler le noyau:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Installer les modules noyaux:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>modules_install
+</pre></div>
+</div>
+</dd>
+<dt>Installer le noyau:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>make<span class="w"> </span>install
+</pre></div>
+</div>
+</dd>
+<dt>Mettre à jour le Grub et redémarrer sur le nouveau noyau:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo<span class="w"> </span>update-grub
+<span class="gp">$ </span>sudo<span class="w"> </span>reboot
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="verification">
+<h2>Vérification<a class="headerlink" href="#verification" title="Lien vers cette rubrique"></a></h2>
+<dl>
+<dt>Vérifier si le noyau est bien installé:</dt><dd><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uname<span class="w"> </span>-a
+</pre></div>
+</div>
+</dd>
+</dl>
 </section>
 </section>
 
