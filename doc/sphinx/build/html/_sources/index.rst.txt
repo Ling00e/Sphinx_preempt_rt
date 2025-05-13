@@ -10,18 +10,8 @@ Cette documentation a pour objectif d’installer un noyau Linux real-time dans 
 
 .. toctree::
    :maxdepth: 1
-   :caption: Installation:
+   :caption: Sommaire:
 
    installation
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Débogage:
-
    debogage
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Test:
-
    test
