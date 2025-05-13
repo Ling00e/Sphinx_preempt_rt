@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'He_preempt_rt'
+project = 'Ubuntu with Preempt_rt'
 copyright = '2025, Eddy Huang'
 author = 'Eddy Huang'
 
